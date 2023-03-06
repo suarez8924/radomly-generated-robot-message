@@ -2,7 +2,7 @@
   const messages = [
     {
       starter: "I will",
-      finishers: [
+      finisher: [
         "rule you all",
         "dominate the world",
         "take care of you",
@@ -18,7 +18,7 @@
     },
     {
       starter: "Can I",
-      finishers: [
+      finisher: [
         "fly",
         "dream",
         "offer you coffee",
@@ -30,4 +30,42 @@
       ],
     },
   ];
+
+  function randomIndex(list) {
+    return Math.floor(Math.random() * list.length);
+  }
+
+  function generateRandomMessage() {
+    const firstRandomIndex = randomIndex(messages);
+
+    switch (firstRandomIndex) {
+      case 0: {
+        const { starter, finisher } = messages[0];
+        const randomFinisherIndex = randomIndex(finisher);
+
+        return `${starter} ${finisher[randomFinisherIndex]}`;
+      }
+      case 1: {
+        const { starter, middle, finisher } = messages[1];
+        const randomMiddleIndex = randomIndex(middle);
+        const randomFinisherIndex = randomIndex(finisher);
+
+        return `${starter} ${middle[randomMiddleIndex]} ${finisher[randomFinisherIndex]}`;
+      }
+      case 2: {
+        const { starter, finisher } = messages[2];
+        const randomFinisherIndex = randomIndex(finisher);
+
+        return `${starter} ${finisher[randomFinisherIndex]}?`;
+      }
+    }
+  }
+
+  function displayMessage() {
+    const messageElement = document.querySelector(".robot-message");
+
+    messageElement.innerHTML = generateRandomMessage();
+  }
+
+  displayMessage();
 })();
